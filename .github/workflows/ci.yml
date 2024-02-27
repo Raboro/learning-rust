@@ -13,6 +13,12 @@ jobs:
       - name: Check
         run: cargo check
 
+      - name: Clippy fix
+        run: cargo clippy --fix
+
+      - name: Check no more Clippy errors
+        run: cargo clippy -- -D warnings
+
       - name: Format
         run: cargo fmt
 
@@ -20,7 +26,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git commit -am "formatted" || true
+          git commit -am "formatted & clippy" || true
 
       - name: Push changes
         uses: ad-m/github-push-action@master
