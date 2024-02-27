@@ -1,3 +1,5 @@
+use std::ops;
+
 trait Greeter {
     fn greet(&self);
 }
@@ -40,6 +42,16 @@ impl Greeter for Person {
     }
 }
 
+impl ops::Add for Person {
+    type Output = Person;
+
+    fn add(mut self, other: Self) -> Self::Output {
+        self.age += other.age;
+        self.alive = self.alive.or(other.alive.or(None));
+        self
+    }
+}
+
 fn main() {
     let person: Person = Person {
         name: "Peter".to_string(),
@@ -48,4 +60,14 @@ fn main() {
     };
     println!("{}", person);
     person.greet();
+
+    println!(
+        "{}",
+        person
+            + Person {
+                name: "alf".to_string(),
+                age: 20,
+                alive: Some(true)
+            }
+    );
 }
