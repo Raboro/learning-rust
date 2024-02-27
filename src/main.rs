@@ -16,10 +16,7 @@ impl Person {
     }
 
     fn am_i_alive(&self) -> bool {
-        match self.alive {
-            Some(a) => a,
-            None => false,
-        }
+        self.alive.unwrap_or(false)
     }
 }
 
