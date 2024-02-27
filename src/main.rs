@@ -68,3 +68,19 @@ fn main() {
             }
     );
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn person_should_be_over_age() -> Result<(), String> {
+        let p: Person = Person {
+            name: "Peter".to_string(),
+            age: 17,
+            alive: None,
+        };
+        assert_eq!(p.is_full_age(), false);
+        Ok(())
+    }
+}
