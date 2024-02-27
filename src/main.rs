@@ -80,7 +80,7 @@ mod test {
             age: 17,
             alive: None,
         };
-        assert_eq!(p.is_full_age(), false);
+        assert!(!p.is_full_age());
         Ok(())
     }
 }
