@@ -10,13 +10,16 @@ struct Person {
     alive: Option<bool>,
 }
 
-impl Person {
+  impl Person {
     fn is_full_age(&self) -> bool {
         self.age >= 18
     }
 
     fn am_i_alive(&self) -> bool {
-        self.alive.unwrap_or(false)
+        match self.alive {
+            Some(a) => a,
+            None => false,
+        }
     }
 }
 
