@@ -1,3 +1,7 @@
+trait Greeter {
+    fn greet(&self);
+}
+
 struct Person {
     name: String,
     age: i8,
@@ -21,10 +25,17 @@ impl std::fmt::Display for Person {
     }
 }
 
+impl Greeter for Person {
+    fn greet(&self) {
+        println!("Hello my name is {}", self.name);
+    }
+}
+
 fn main() {
     let person: Person = Person {
         name: "Peter".to_string(),
         age: 19,
     };
     println!("{}", person);
+    person.greet();
 }
