@@ -45,6 +45,8 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -61,3 +63,13 @@ jobs:
           RUSTFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
           RUSTDOCFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
       - uses: actions-rs/grcov@v0.1
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=raboro
+            -Dsonar.projectKey=Raboro_learning-rust
+            -Dsonar.javascript.lcov.reportPaths= ${{ steps.coverage.outputs.report }}
