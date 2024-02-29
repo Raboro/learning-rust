@@ -49,7 +49,57 @@ impl ops::Add for Person {
     }
 }
 
+trait Dialog {
+    fn display(&self);
+}
+
+struct WindowsDialog {}
+
+impl Dialog for WindowsDialog {
+    fn display(&self) {
+        println!("Windows")
+    }
+}
+
+struct LinuxDialog {}
+
+impl Dialog for LinuxDialog {
+    fn display(&self) {
+        println!("Linux")
+    }
+}
+
+struct MacDialog {}
+
+impl Dialog for MacDialog {
+    fn display(&self) {
+        println!("Mac")
+    }
+}
+
+struct DialogFactory {}
+
+enum DialogName {
+    WINDOWS,
+    LINUX,
+    MAC,
+}
+
+impl DialogFactory {
+    fn create(name: DialogName) -> Box<dyn Dialog> {
+        match name {
+            DialogName::WINDOWS => Box::new(WindowsDialog {}),
+            DialogName::LINUX => Box::new(LinuxDialog {}),
+            DialogName::MAC => Box::new(MacDialog {}),
+        }
+    }
+}
+
 fn main() {
+    DialogFactory::create(DialogName::WINDOWS).display();
+    DialogFactory::create(DialogName::MAC).display();
+    DialogFactory::create(DialogName::LINUX).display();
+
     let person: Person = Person {
         name: "Peter".to_string(),
         age: 19,
