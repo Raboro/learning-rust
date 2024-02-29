@@ -80,25 +80,25 @@ impl Dialog for MacDialog {
 struct DialogFactory {}
 
 enum DialogName {
-    WINDOWS,
-    LINUX,
-    MAC,
+    Windows,
+    Linux,
+    Mac,
 }
 
 impl DialogFactory {
     fn create(name: DialogName) -> Box<dyn Dialog> {
         match name {
-            DialogName::WINDOWS => Box::new(WindowsDialog {}),
-            DialogName::LINUX => Box::new(LinuxDialog {}),
-            DialogName::MAC => Box::new(MacDialog {}),
+            DialogName::Windows => Box::new(WindowsDialog {}),
+            DialogName::Linux => Box::new(LinuxDialog {}),
+            DialogName::Mac => Box::new(MacDialog {}),
         }
     }
 }
 
 fn main() {
-    DialogFactory::create(DialogName::WINDOWS).display();
-    DialogFactory::create(DialogName::MAC).display();
-    DialogFactory::create(DialogName::LINUX).display();
+    DialogFactory::create(DialogName::Windows).display();
+    DialogFactory::create(DialogName::Mac).display();
+    DialogFactory::create(DialogName::Linux).display();
 
     let person: Person = Person {
         name: "Peter".to_string(),
