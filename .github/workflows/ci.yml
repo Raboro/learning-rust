@@ -73,4 +73,4 @@ jobs:
           args: >
             -Dsonar.organization=raboro
             -Dsonar.projectKey=Raboro_learning-rust
-            -Dsonar.javascript.lcov.reportPaths= ${{ steps.coverage.outputs.report }}/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=./${{ steps.coverage.outputs.report }}/lcov.info
