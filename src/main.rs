@@ -160,11 +160,17 @@ fn main() {
         .map(|e| e.unwrap_or('a').to_digit(10).unwrap_or(0))
         .fold(0, |acc, number| number + acc);
     println!("{}", result);
-    println!("{:?}", fs::create_file("hello.txt"));
+    println!("{:?}", fs::create_file("hello.txt", None));
 
     // sailfish
-    let template = sf::HelloT { title: "Hello" };
-    print!("{}", template.render_once().unwrap());
+    let template: sf::HelloT<'_> = sf::HelloT {
+        title: "Hello World",
+    };
+    let rendered: Result<String, sailfish::RenderError> = template.render_once();
+    if rendered.is_err() {
+        return;
+    }
+    fs::create_file("index.html", Some(rendered.unwrap()));
 }
 
 #[cfg(test)]
