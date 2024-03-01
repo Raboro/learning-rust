@@ -1,4 +1,6 @@
-use std::ops;
+use std::{collections::LinkedList, ops};
+
+const FULL_AGE: i8 = 18;
 
 trait Greeter {
     fn greet(&self);
@@ -12,7 +14,7 @@ struct Person {
 
 impl Person {
     fn is_full_age(&self) -> bool {
-        self.age >= 18
+        self.age >= FULL_AGE
     }
 
     fn am_i_alive(&self) -> bool {
@@ -95,6 +97,10 @@ impl DialogFactory {
     }
 }
 
+fn contains_comma(text: &str) -> bool {
+    text.contains(',')
+}
+
 fn main() {
     DialogFactory::create(DialogName::Windows).display();
     DialogFactory::create(DialogName::Mac).display();
@@ -117,6 +123,38 @@ fn main() {
                 alive: Some(true)
             }
     );
+
+    let arr: [u8; 4] = [1, 2, 3, 4];
+
+    for ae in arr {
+        print!("{}", ae);
+    }
+
+    for i in 0..=10 {
+        print!("{}", i);
+    }
+
+    let tupl: (u8, char, bool, &str) = (10, '1', true, "hi");
+    println!("{}, {}, {}, {}", tupl.0, tupl.1, tupl.2, tupl.3);
+    println!("{}", contains_comma("he,llo"));
+
+    let vector: Vec<u32> = vec![10, 1, 5];
+
+    for e in vector {
+        println!("{}", e);
+    }
+
+    let mut linked_list: LinkedList<&str> = LinkedList::new();
+    linked_list.push_back("hello");
+    linked_list.push_back("hell12");
+    let result = linked_list
+        .iter()
+        .map(|&e| e.chars().last())
+        .filter(|&e| e.is_some())
+        .filter(|e| e.unwrap_or('a').is_ascii_digit())
+        .map(|e| e.unwrap_or('a').to_digit(10).unwrap_or(0))
+        .fold(0, |acc, number| number + acc);
+    println!("{}", result);
 }
 
 #[cfg(test)]
