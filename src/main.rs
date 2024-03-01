@@ -106,6 +106,20 @@ fn contains_comma(text: &str) -> bool {
     text.contains(',')
 }
 
+fn largest<T: std::cmp::Ord>(list: &[T]) -> Option<&T> {
+    if list.is_empty() {
+        return None;
+    }
+    let mut largest: &T = &list[0];
+
+    for element in list {
+        if element > &largest {
+            largest = element;
+        }
+    }
+    Some(largest)
+}
+
 fn main() {
     DialogFactory::create(DialogName::Windows).display();
     DialogFactory::create(DialogName::Mac).display();
@@ -171,6 +185,8 @@ fn main() {
         return;
     }
     fs::create_file("index.html", Some(rendered.unwrap()));
+
+    println!("{:?}", largest(&[1, 2, -1]));
 }
 
 #[cfg(test)]
