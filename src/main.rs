@@ -1,3 +1,5 @@
+mod fs;
+
 use std::{collections::LinkedList, ops};
 
 const FULL_AGE: i8 = 18;
@@ -155,6 +157,7 @@ fn main() {
         .map(|e| e.unwrap_or('a').to_digit(10).unwrap_or(0))
         .fold(0, |acc, number| number + acc);
     println!("{}", result);
+    println!("{:?}", fs::create_file("hello.txt"));
 }
 
 #[cfg(test)]
