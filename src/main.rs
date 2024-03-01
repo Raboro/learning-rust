@@ -1,6 +1,9 @@
 mod fs;
+mod sf;
 
 use std::{collections::LinkedList, ops};
+
+use sailfish::TemplateOnce;
 
 const FULL_AGE: i8 = 18;
 
@@ -158,6 +161,10 @@ fn main() {
         .fold(0, |acc, number| number + acc);
     println!("{}", result);
     println!("{:?}", fs::create_file("hello.txt"));
+
+    // sailfish
+    let template = sf::HelloT { title: "Hello" };
+    print!("{}", template.render_once().unwrap());
 }
 
 #[cfg(test)]
