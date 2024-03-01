@@ -113,7 +113,7 @@ fn largest<T: std::cmp::Ord>(list: &[T]) -> Option<&T> {
     let mut largest: &T = &list[0];
 
     for element in list {
-        if element > &largest {
+        if element > largest {
             largest = element;
         }
     }
