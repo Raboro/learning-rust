@@ -187,6 +187,10 @@ fn main() {
     fs::create_file("index.html", Some(rendered.unwrap()));
 
     println!("{:?}", largest(&[1, 2, -1]));
+
+    let template = sf::Template::new(&"Hello", &"txt", None, sf::HelloT { title: "Hello" });
+    println!("{}", template);
+    println!("{}", template.render());
 }
 
 #[cfg(test)]
