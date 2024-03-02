@@ -28,10 +28,8 @@ impl<'a, T: TemplateOnce> Template<'a, T> {
         }
     }
 
-    pub fn render(self) -> String {
-        self.template
-            .render_once()
-            .unwrap_or_else(|_| String::new())
+    pub fn render(self) -> Option<String> {
+        self.template.render_once().ok()
     }
 }
 

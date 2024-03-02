@@ -190,7 +190,7 @@ fn main() {
 
     let template = sf::Template::new("Hello", "txt", None, sf::HelloT { title: "Hello" });
     println!("{}", template);
-    println!("{}", template.render());
+    println!("{}", template.render().unwrap_or_else(String::new));
 }
 
 #[cfg(test)]
