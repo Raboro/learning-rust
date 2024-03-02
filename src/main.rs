@@ -188,7 +188,7 @@ fn main() {
 
     println!("{:?}", largest(&[1, 2, -1]));
 
-    let template = sf::Template::new(&"Hello", &"txt", None, sf::HelloT { title: "Hello" });
+    let template = sf::Template::new("Hello", "txt", None, sf::HelloT { title: "Hello" });
     println!("{}", template);
     println!("{}", template.render());
 }
