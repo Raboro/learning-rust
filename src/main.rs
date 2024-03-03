@@ -189,8 +189,15 @@ fn main() {
     println!("{:?}", largest(&[1, 2, -1]));
 
     let template = sf::Template::new("Hello", "txt", None, sf::HelloT { title: "Hello" });
-    println!("{}", template);
-    println!("{}", template.render().unwrap_or_default());
+    let template2 = sf::Template::new("Hello", "txt", None, sf::HelloT { title: "Hello" });
+
+    let templates = vec![template, template2];
+
+    let rendered: Vec<String> = templates.into_iter().filter_map(|t| t.render()).collect();
+
+    for s in rendered {
+        println!("{}", s);
+    }
 }
 
 #[cfg(test)]
